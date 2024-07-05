@@ -1,0 +1,54 @@
+#level 3 : vote analysis
+#1.Identify the restaurants with the highest and lowest number of votes.
+
+
+df_votes=df[['Votes','Restaurant Name']]
+df_votes
+
+print('Restaurant with highest Voyytes:')
+max_votes=df_votes.loc[df_votes['Votes'].idxmax()]
+max_votes
+
+output: Restaurant with highest Voyytes:
+Votes              10934
+Restaurant Name     Toit
+Name: 728, dtype: object
+
+
+#2.)Analyze if there is a correlation between the number of votes and the rating of a restaurant.
+
+df_analysis = df[['Votes','Aggregate rating']].copy()
+df_analysis
+
+output:	Votes	Aggregate rating
+0	314	4.8
+1	591	4.5
+2	270	4.4
+3	365	4.9
+4	229	4.8
+...	...	...
+9546	788	4.1
+9547	1034	4.2
+9548	661	3.7
+9549	901	4.0
+9550	591	4.0
+9551 rows × 2 columns
+
+
+corr=df_analysis['Votes'].corr(df_analysis["Aggregate rating"])
+corr
+
+output: 0.3136905841954117
+
+import seaborn as sns
+
+plt.figure(figsize=(10,10))
+sns.scatterplot(x='Votes',y='Aggregate rating',data=df_analysis)
+plt.title('Relation between Number of Votes and Restaurant Rating')
+plt.xlabel("Number of Votes")
+plt.ylabel('Aggregate Rating')
+plt.show()
+
+
+
+
