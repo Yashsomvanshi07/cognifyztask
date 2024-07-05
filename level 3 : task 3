@@ -1,0 +1,55 @@
+#task 3 level 3 : Price Range vs. Online Delivery and
+Table Booking
+
+#Analyze if there is a relationship between the
+price range and the availability of online
+delivery and table booking.
+
+#Determine if higher-priced restaurants are
+more likely to offer these services.
+
+df.head(1)
+
+df_analysis=df[['Price range','Has Online delivery','Has Table booking']].copy()
+df_analysis['Has Online delivery']=df_analysis['Has Online delivery'].map({'Yes':True,'No':False})
+df_analysis['Has table booking']=df_analysis['Has Table booking'].map({'Yes':True,'No':Fals
+
+summary_table = pd.pivot_table(df_analysis, index='Price range', values=['Has Online delivery', 'Has table booking'], aggfunc='sum')
+
+
+
+
+print('Summary Table:')
+summary_table
+
+
+
+summary_table
+df
+
+plt.figure(figsize=(10, 8))
+custom_colors = ['#1f77b4', '#ff7f0e']
+summary_table.plot(kind='bar', stacked=True, color=custom_colors)
+plt.title('Relationship between Price Range and Availability')
+plt.xlabel('Price Range')
+plt.ylabel('Count')
+plt.legend(title='Feature', loc='upper left')
+plt.show()
+
+
+
+
+
+plt.figure(figsize=(10,6))
+
+plt.subplot(1,2,1)
+
+sns.countplot(x='Price range' , hue='Has Online delivery' , data=df_analysis,palette='viridis')
+plt.title('Online Delivery Avalibility by Price Range')
+
+plt.subplot(1,2,2)
+sns.countplot(x='Price range', hue='Has Table booking', data=df_analysis,palette='viridis')
+plt.title('Table Booking Availibility by Price range')
+
+plt.tight_layout()
+plt.show()
