@@ -1,0 +1,41 @@
+#this task was level 1 task 2 #CityAnalysis
+
+
+import numpy as np 
+import pandas as pd 
+import matplotlib.pyplot as plt 
+
+
+df = pd.read_csv('Dataset .csv' , encoding = 'unicode_escape')
+df.shape     
+
+df.head()
+
+pd.isnull(df).sum()
+#EXPLOTOARY DATA ANALYSIS
+df.columns
+#output: Index(['ï»¿Restaurant ID', 'Restaurant Name', 'Country Code', 'City',
+       'Address', 'Locality', 'Locality Verbose', 'Longitude', 'Latitude',
+       'Cuisines', 'Average Cost for two', 'Currency', 'Has Table booking',
+       'Has Online delivery', 'Is delivering now', 'Switch to order menu',
+       'Price range', 'Aggregate rating', 'Rating color', 'Rating text',
+       'Votes'],
+      dtype='object')
+
+restaurant_count = df.groupby('City')['ï»¿Restaurant ID'].count()
+city_with_highest_restaurants =restaurant_count.idxmax()
+print("city with the highest number of restaurant:",city_with_highest_restaurants)
+
+output: city with the highest number of restaurant: New Delhi
+
+average_rating = df.groupby('City')['Aggregate rating'].mean()
+average_rating.plot(kind='bar', figsize=(29, 5))
+plt.xlabel('city')
+plt.ylabel('Average Rating')
+plt.show()
+
+city_with_highest_average_rating = average_rating.idxmax()
+print("City with highest number Rating: ",city_with_highest_average_rating )
+
+City with highest number Rating:  Inner City
+
